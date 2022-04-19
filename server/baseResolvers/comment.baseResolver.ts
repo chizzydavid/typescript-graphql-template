@@ -4,7 +4,7 @@ import { Service } from "typedi";
 import { Comment, CommentInput } from "../schema/comment.schema";
 import CommentResolver from "../resolvers/comment.resolver";
 import Context from "../types/context";
-import Logger from "../utils/logger/logger";
+import LogHelper from "../utils/logger/logHelper";
 
 
 @Service()
@@ -12,7 +12,7 @@ import Logger from "../utils/logger/logger";
 export default class CommentBaseResolver {
   constructor(
     private readonly commentResolver: CommentResolver,
-    private readonly logger: Logger,
+    private readonly logger: LogHelper,
   ) {}
 
   @Query(() => [Comment])
@@ -37,7 +37,7 @@ export default class CommentBaseResolver {
   ): Promise<Comment> {
     try {
       this.logger.createLog('STARTED', 'COMMENT', 'addComment', context, commentInput, 'New');
-      const res = await this.commentResolver.addComment(commentInput, context);
+      const res = await this.commentResolver.addComment(commentInput);
       this.logger.createLog('SUCCESS', 'COMMENT', 'addComment', context, commentInput, 'New');
       return res;
     } catch (error: any) {

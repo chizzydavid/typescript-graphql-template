@@ -1,9 +1,8 @@
 
-import { Query, Resolver, Mutation, Arg, Ctx } from "type-graphql";
+import { Arg } from "type-graphql";
 import { Service } from "typedi";
 import { Comment, CommentInput } from "../schema/comment.schema";
 import CommentService from "../services/comment.service";
-import Context from "../types/context";
 
 
 @Service()
@@ -16,7 +15,6 @@ export default class CommentResolver {
 
   async addComment(
     @Arg('commentInput') commentInput: CommentInput,
-    @Ctx() context: Context
   ): Promise<Comment> {
     return await this.commentService.addComment(commentInput);
   }

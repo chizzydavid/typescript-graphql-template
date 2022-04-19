@@ -10,6 +10,7 @@ import {
   ApolloServerPluginLandingPageProductionDefault,
 } from "apollo-server-core";
 import connectToDatabase from "./utils/database/mongo";
+import LogPlugin from "./utils/logger/logPlugin";
 
 
 const buildUserContext = (ctx: Context) => {
@@ -33,6 +34,7 @@ async function bootstrap() {
       process.env.NODE_ENV === "production"
         ? ApolloServerPluginLandingPageProductionDefault()
         : ApolloServerPluginLandingPageGraphQLPlayground(),
+      Container.get<LogPlugin>(LogPlugin).log()
     ],    
   })
 
@@ -40,11 +42,14 @@ async function bootstrap() {
   server.applyMiddleware({ app });
   
   app.listen({ port: 4000 }, () => {
+    // eslint-disable-next-line no-console
     console.log("App is listening on http://localhost:4000");
-  });
-
+  }); 
+ 
   connectToDatabase();
 }
+
+
 
 bootstrap();
 
