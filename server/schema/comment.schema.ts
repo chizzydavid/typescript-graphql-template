@@ -1,6 +1,6 @@
 import { getModelForClass, prop, Ref } from "@typegoose/typegoose";
 import { Field, InputType, ObjectType, ID } from "type-graphql";
-import { getSchemaOptions } from "../utils/database/schema_options";
+// import { getSchemaOptions } from "../utils/database/schema_options";
 import { Movie } from "./movie.schema";
 
 @ObjectType()

@@ -3,14 +3,14 @@ import { Service } from "typedi";
 import { Movie, MovieInput } from "../schema/movie.schema";
 import MovieResolver from "../services/movie.service";
 import Context from "../types/context";
-import Logger from "../utils/logger/logger";
+import LogHelper from "../utils/logger/logHelper";
 
 @Service()
 @Resolver(() => Movie)
 export default class MovieBaseResolver {
   constructor(
     private readonly movieResolver: MovieResolver,
-    private readonly logger: Logger,
+    private readonly logger: LogHelper,
   ) {}
 
   @Query(() => [Movie])
