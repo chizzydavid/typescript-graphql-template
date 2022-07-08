@@ -39,7 +39,7 @@ export default class LogPlugin {
             const operationDefinition = requestContext.document?.definitions[0] as OperationDefinitionNode;
             const fieldNode = operationDefinition?.selectionSet.selections[0] as FieldNode;
             operation = fieldNode?.name?.value; 
-            this.logger.logRequest('started', operation,  requestContext);
+            this.logger.logRequest('started',  requestContext);
           },
  
           /**
@@ -48,7 +48,7 @@ export default class LogPlugin {
            */
           didEncounterErrors: async (requestContext: GraphQLRequestContext): Promise<void> => {
             requestSuccessful = false;
-            this.logger.logRequest('error', operation, requestContext);
+            this.logger.logRequest('error', requestContext);
           },
           
           /**
@@ -62,7 +62,7 @@ export default class LogPlugin {
             const size = JSON.stringify(requestContext.response).length * 2
             const requestStats = `operation=${operation} duration=${elapsed}ms bytes=${size}`
             if (requestSuccessful) {
-              this.logger.logRequest('success', operation,  requestContext)
+              this.logger.logRequest('success',  requestContext)
             }
           },
 

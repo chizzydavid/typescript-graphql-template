@@ -4,7 +4,7 @@ import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
 import { Container } from "typedi";
 import Context from "./types/context";
-import resolvers from "./baseResolvers";
+import resolvers from "./resolvers";
 import {
   ApolloServerPluginLandingPageGraphQLPlayground,
   ApolloServerPluginLandingPageProductionDefault,
@@ -14,7 +14,6 @@ import LogPlugin from "./utils/logger/logPlugin";
 
 
 const buildUserContext = (ctx: Context) => {
-  // ADD HEADER PARAMS TO CONTEXT
   const context = ctx;
   return context;
 }
